@@ -11,6 +11,11 @@ def organizations():
     orgs = models.Organization.query.all()
     return render_template('organizations.html', orgs=orgs)
 
+@app.route('/skills/<int:skill_id>/')
+def specific_skill(skill_id):
+    skill = models.Skill.query.get_or_404(skill_id)
+    return skill.name
+
 @app.context_processor
 def generate_header_links():
     header_links = [("Main", main), ("Organizations", organizations)]

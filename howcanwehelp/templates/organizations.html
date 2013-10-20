@@ -7,9 +7,9 @@
             {{org.description}}
         </div>
         <div class="panel-footer">
-            <p>Skills:</p>
+            <h6>Skills:</h6>
             {% for skill in org.skills %}
-            <span class="label label-default">{{skill.name}}</span>
+            <span class="label label-default"><a href="/skills/{{skill.id}}/">{{skill.name}}</a></span>
             {% endfor %}
         </div>
     </div>
