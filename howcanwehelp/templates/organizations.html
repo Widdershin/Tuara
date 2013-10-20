@@ -1,0 +1,11 @@
+{% extends "main.html" %}
+{% block content %}
+    {% for org in orgs %}
+    <div class="container panel panel-default">
+        <div class="panel-heading"><b>{{org.name}}</b></div>
+        <div class="panel-body">
+            <p>{{org.description}}</p>
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}

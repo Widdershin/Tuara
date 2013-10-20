@@ -1,13 +1,20 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for
 from __init__ import app, db
 import models
 
 @app.route('/')
-def test():
-    orgs = models.Organization.query.all()
-
-    #return "".join(["<p>{}: {}</p>\n".format(org.name, org.description) for org in orgs])
+def main():
     return render_template('main.html')
+
+@app.route('/organizations/')
+def organizations():
+    orgs = models.Organization.query.all()
+    return render_template('organizations.html', orgs=orgs)
+
+@app.context_processor
+def generate_header_links():
+    header_links = [("Main", main), ("Organizations", organizations)]
+    return dict(header_links=[(label, url_for(str(func.__name__))) for label, func in header_links])
 
 if __name__ == '__main__':
     app.run(debug=True)
