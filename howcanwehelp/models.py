@@ -12,6 +12,10 @@ class Organization(db.Model):
     skills = db.relationship('Skill', secondary=skills,
         backref=db.backref('organizations', lazy='dynamic'))
 
+    def __init__(self, name=name, description=description):
+        self.name = name
+        self.description = description
+
     def __str__(self):
         return self.name
 
