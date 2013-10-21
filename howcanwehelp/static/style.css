@@ -1,8 +1,4 @@
-body
+.label a
 {
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    font-family: Source Sans Pro;
-    width: 50em;
+    color: #fff;
 }
