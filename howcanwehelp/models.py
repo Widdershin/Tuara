@@ -23,11 +23,3 @@ class Skill(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(30))
     description = db.Column(db.String(200), default="")
-
-class ClassName(object):
-    """docstring for ClassName"""
-    def __init__(self, name, description):
-        super(ClassName, self).__init__()
-        self.name = name
-        self.description = description
-        
