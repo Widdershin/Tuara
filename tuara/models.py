@@ -1,4 +1,4 @@
-from __init__ import db
+from __init__ import db, admin
 
 skills = db.Table('skills',
     db.Column('skill_id', db.Integer, db.ForeignKey('skill.id')),
@@ -23,3 +23,12 @@ class Skill(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(30))
     description = db.Column(db.String(200), default="")
+
+    def __repr__(self):
+        return self.name
+
+def register_for_admin(classes):
+    for cls in classes:
+        admin.register(cls, session=db.session)
+
+register_for_admin([Organization, Skill])

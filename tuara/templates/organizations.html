@@ -1,13 +1,14 @@
 {% extends "main.html" %}
 {% block content %}
     {% for org in orgs %}
-    <div class="panel panel-default">
+    <div class="panel panel-default card">
+    
         <div class="panel-heading"><b>{{org.name}}</b></div>
         <div class="panel-body">
             {{org.description}}
         </div>
-        <div class="panel-footer">
-            <h6>Skills:</h6>
+        <div class="panel-footer skills-box">
+            <span class="label-skills">Skills Needed</span>
             {% for skill in org.skills %}
             <span class="label label-default"><a href="/skills/{{skill.id}}/">{{skill.name}}</a></span>
             {% endfor %}

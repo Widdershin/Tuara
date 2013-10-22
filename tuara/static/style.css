@@ -1,4 +1,47 @@
 .label a
 {
-    color: #fff;
+    color: #434E54;
+}
+
+.label
+{
+    background-color: #CFCFCF;
+}
+
+.label-skills
+{
+    position: relative;
+    color: #BBB;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size: 12px;
+    margin-right: 1em;
+    top: 1px;
+}
+
+
+.jumbotron
+{
+    padding: 1em;
+}
+
+.panel-footer, .panel-heading
+{
+    border-width: 0px !important;
+    border: 0px 0px 0px 0px !important;
+    background-color: rgb(240, 240, 240);
+}
+
+.panel-body
+{
+    background-color: rgb(249, 249, 249);
+}
+
+.card
+{
+    border-radius: 1px !important;
+    box-shadow: 0px 1px 0px #CFCFCF;
+    border-width: 0px !important;
+    border-top: 0px !important;
 }

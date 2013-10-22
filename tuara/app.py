@@ -1,8 +1,11 @@
 from flask import Flask, render_template, url_for
-from __init__ import app, db
-import models
+from __init__ import app, db, models
 
 APP_NAME = "Tuara"
+APP_DESCRIPTION = """
+{} is a platform aimed at connecting people with niche
+ skills with the organizations in their community that their help could most impact.
+ """.format(APP_NAME)
 
 @app.route('/')
 def main():
@@ -24,8 +27,8 @@ def specific_skill(skill_id):
     return skill.name
 
 @app.context_processor
-def app_name():
-    return {"app_name": APP_NAME}
+def add_app_details():
+    return {"app_name": APP_NAME, "app_description": APP_DESCRIPTION}
 
 @app.context_processor
 def generate_header_links():
