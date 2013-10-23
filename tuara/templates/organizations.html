@@ -9,9 +9,13 @@
         </div>
         <div class="panel-footer skills-box">
             <span class="label-skills">Skills Needed</span>
+            <div class="skills">
             {% for skill in org.skills %}
-            <span class="label label-default"><a href="/skills/{{skill.id}}/">{{skill.name}}</a></span>
+            <span class="label label-default"><a href="/skills/{{skill.id}}/">{{skill.name}}</a></span></span>
+
             {% endfor %}
+            </div>
+            <div class="btn-box"><a href="mailto:{{org.email}}"><button type="button" class="btn btn-default card align-right">Contact</button></a></div>
         </div>
     </div>
     {% endfor %}

@@ -20,6 +20,8 @@
     margin-left: -0.5em;
     margin-right: 0.5em;
     top: 1px;
+    vertical-align: middle;
+    display: inline-block;
 }
 
 
@@ -33,6 +35,8 @@
     border-width: 0px !important;
     border: 0px 0px 0px 0px !important;
     background-color: rgb(240, 240, 240);
+    float: left;
+    width: 100%;
 }
 
 .panel-body
@@ -65,4 +69,15 @@
 .footer p
 {
     margin: 1em;
+}
+
+.btn
+{
+    display: block;
+    margin: 0px; 
+}
+
+.align-right
+{
+    float: right;
 }
