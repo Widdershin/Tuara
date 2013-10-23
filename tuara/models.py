@@ -9,6 +9,7 @@ class Organization(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(150))
     description = db.Column(db.String(400), default="")
+    email = db.Column(db.String(60))
     skills = db.relationship('Skill', secondary=skills,
         backref=db.backref('organizations', lazy='dynamic'))
 
