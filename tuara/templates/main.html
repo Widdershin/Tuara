@@ -13,9 +13,6 @@
     <link href="/static/bootstrap.css" rel="stylesheet">
     <link href="/static/style.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="navbar.css" rel="stylesheet">
-
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="../../assets/js/html5shiv.js"></script>
@@ -41,7 +38,7 @@
 
       <!-- Main component for a primary marketing message or call to action -->
       {% block content %}
-      <div class="jumbotron card">
+      <div class="card jumbotron">
         <h1>{{app_name}}</h1>
         <p>{{app_description}}</p>
         <p>
@@ -49,6 +46,10 @@
         </p>
       </div>
       {% endblock %}
+
+      <div class="card">
+      <p> test </p>
+      </div>
 
     </div> <!-- /container -->
 
