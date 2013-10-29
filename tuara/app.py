@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request
 from __init__ import app, db, models
 
 APP_NAME = "Tuara"
@@ -32,8 +32,18 @@ def add_app_details():
 
 @app.context_processor
 def generate_header_links():
-    header_links = [("Main", main), ("Organizations", organizations), ("Skills", skills)]
-    return dict(header_links=[(label, url_for(str(func.__name__))) for label, func in header_links])
+    header_links = [("Organizations", organizations), ("Skills", skills)]
+
+    processed_header_links = []
+
+    #TODO: Handle url matching for suburls
+    for label, func in header_links:
+        url = url_for(func.__name__)
+        active = request.path == url
+        processed_header_links.append((label, url, active))
+
+
+    return dict(header_links=processed_header_links)
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -29,8 +29,8 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            {% for label, link in header_links %}
-            <li><a href="{{link}}">{{label}}</a></li>
+            {% for label, link, active in header_links %}
+            <li {% if active %}class="active"{% endif %}><a href="{{link}}">{{label}}</a></li>
             {% endfor %}
           </ul>
         </div><!--/.nav-collapse -->
