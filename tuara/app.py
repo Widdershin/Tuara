@@ -1,5 +1,6 @@
+from werkzeug.security import generate_password_hash, check_password_hash
 from flask import Flask, render_template, url_for, request
-from __init__ import app, db, models
+from __init__ import app, db, models, login_manager
 
 APP_NAME = "Tuara"
 APP_DESCRIPTION = """
@@ -25,6 +26,20 @@ def skills():
 def specific_skill(skill_id):
     skill = models.Skill.query.get_or_404(skill_id)
     return skill.name
+
+@app.route('/login/')
+def login_page():
+    return render_template('login.html')
+
+@app.route('/post/login/', methods=['POST'])
+def login():
+    User.query.filter_by(username=request.values['email']).first()
+
+    pass
+
+@login_manager.user_loader
+def load_user(id):
+    return models.User.query.get(int(id))
 
 @app.context_processor
 def add_app_details():

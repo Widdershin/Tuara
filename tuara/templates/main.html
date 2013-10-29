@@ -31,7 +31,10 @@
           <ul class="nav navbar-nav">
             {% for label, link, active in header_links %}
             <li {% if active %}class="active"{% endif %}><a href="{{link}}">{{label}}</a></li>
-            {% endfor %}
+            {% endfor %}            
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/login/">Login</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
