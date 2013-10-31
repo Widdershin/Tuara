@@ -1,6 +1,6 @@
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask import Flask, render_template, url_for, request
-from __init__ import app, db, models, login_manager
+from flask import Flask, render_template, url_for, request, redirect
+from __init__ import app, db, models, login_manager, login_user, login_required
 
 APP_NAME = "Tuara"
 APP_DESCRIPTION = """
@@ -33,9 +33,15 @@ def login_page():
 
 @app.route('/post/login/', methods=['POST'])
 def login():
-    User.query.filter_by(username=request.values['email']).first()
+    user = models.User.query.filter_by(email=request.values['email']).first_or_404()
 
-    pass
+    successful_login = user.check_password(request.values['password'])
+
+    if successful_login:
+        login_user(user)
+        return redirect(url_for(main))
+
+    return render_template('main.html')
 
 @login_manager.user_loader
 def load_user(id):

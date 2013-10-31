@@ -1,7 +1,7 @@
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.superadmin import Admin, model
-from flask.ext.login import LoginManager
+from flask.ext.login import LoginManager, login_user, login_required
 import sys
 
 app = Flask(__name__)
