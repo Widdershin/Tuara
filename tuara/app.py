@@ -24,7 +24,7 @@ def skills():
 @app.route('/skills/<int:skill_id>/')
 def specific_skill(skill_id):
     skill = models.Skill.query.get_or_404(skill_id)
-    return skill.name
+    return render_template('specific_skill.html', skill=skill)
 
 @app.context_processor
 def add_app_details():
