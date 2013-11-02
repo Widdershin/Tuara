@@ -2,13 +2,15 @@
 {% block content %}
     
     <div class="card card-half">
-        <form role="form" action="/post/login/" method="post">
-        <span class="label-gray">Login</span>
-        <div class="form-group">
-            <input type="email" class="form-control" name="email" placeholder="Email">
-            <input type="password" class="form-control" name="password" placeholder="Password">
+        <div class="card-contents">
+            <form role="form" action="/post/login/" method="post">
+            <span class="label-gray">Login</span>
+            <div class="form-group">
+                <input type="email" class="form-control" name="email" placeholder="Email">
+                <input type="password" class="form-control" name="password" placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-default card align-right">Login</button>
+            </form>
         </div>
-        <button type="submit" class="btn btn-default card align-right">Login</button>
-        </form>
     </div>
 {% endblock %}
