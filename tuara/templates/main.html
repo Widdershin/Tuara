@@ -31,7 +31,10 @@
           <ul class="nav navbar-nav">
             {% for label, link, active in header_links %}
             <li {% if active %}class="active"{% endif %}><a href="{{link}}">{{label}}</a></li>
-            {% endfor %}
+            {% endfor %}            
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/login/">Login</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -47,7 +50,7 @@
       </div>
       {% endblock %}
 
-      <div class="card footer">
+      <div class="card footer card-half">
       <p> <i>Copyright 2013 - Nick Johnstone </p>
       </div>
 
@@ -56,7 +59,7 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="static/jquery-2.0.3.min.js"></script>
-    <script src="static/bootstrap.min.js"></script>
+    <script src="/static/jquery-2.0.3.min.js"></script>
+    <script src="/static/bootstrap.min.js"></script>
   </body>
 </html>

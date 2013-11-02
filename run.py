@@ -1,4 +1,4 @@
 import tuara
 
 if __name__ == '__main__':
-    tuara.app.run()
+    tuara.app.run(debug=True)

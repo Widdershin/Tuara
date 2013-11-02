@@ -1,35 +1,47 @@
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask.ext.mongoengine import Document
 from __init__ import db, admin
 
-skills = db.Table('skills',
-    db.Column('skill_id', db.Integer, db.ForeignKey('skill.id')),
-    db.Column('organization_id', db.Integer, db.ForeignKey('organization.id'))
-)
-
-class Organization(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(150))
-    description = db.Column(db.String(400), default="")
-    email = db.Column(db.String(60))
-    skills = db.relationship('Skill', secondary=skills,
-        backref=db.backref('organizations', lazy='dynamic'))
-
-    def __init__(self, name=name, description=description):
-        self.name = name
-        self.description = description
+class Organization(Document):
+    name = db.StringField(required=True, max_length=30)
+    description = db.StringField(required=True, max_length=400)
+    email = db.StringField(required=True, max_length=200)
+    skills = db.ListField(db.ReferenceField('Skill'))
 
     def __str__(self):
         return self.name
 
-class Skill(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(30))
-    description = db.Column(db.String(200), default="")
+class Skill(Document):
+    name = db.StringField(max_length=30, required=True)
+    description = db.StringField(max_length=200, required=True)
 
     def __repr__(self):
         return self.name
 
+    def __str__(self):
+        return self.name
+
+class User(Document):
+    email = db.StringField(max_length=200, required=True)
+    user_name = db.StringField(max_length=20, required=True)
+    password_hash = db.StringField(max_length=67)
+
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
+
+    def is_authenticated():
+        pass
+
+    def __repr__(self):
+        pass
+    #    return self.email, self.user_name
+
+
 def register_for_admin(classes):
     for cls in classes:
-        admin.register(cls, session=db.session)
+        admin.register(cls)
 
-register_for_admin([Organization, Skill])
+register_for_admin([Organization, Skill, User])
