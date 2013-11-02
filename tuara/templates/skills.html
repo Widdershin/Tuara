@@ -4,7 +4,7 @@
         <div class="panel-heading"><b>All Skills</b></div>
         <div class="panel-body">
             {% for skill in skills %}
-                <span class="label label-default"><a href="/skills/{{skill.id}}/">{{skill.name}}</a></span>
+                <span class="label label-default"><a href="/skills/{{skill.slug}}/">{{skill.name}}</a></span>
             {% endfor %}
         </div>
     </div>

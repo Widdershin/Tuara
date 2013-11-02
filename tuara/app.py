@@ -22,9 +22,9 @@ def skills():
     skills = models.Skill.objects
     return render_template('skills.html', skills=skills)
 
-@app.route('/skills/<int:skill_id>/')
-def specific_skill(skill_id):
-    skill = models.Skill.query.get_or_404(skill_id)
+@app.route('/skills/<skill_slug>/')
+def specific_skill(skill_slug):
+    skill = models.Skill.objects.get_or_404(slug=skill_slug)
     return render_template('specific_skill.html', skill=skill)
 
 @app.route('/login/')

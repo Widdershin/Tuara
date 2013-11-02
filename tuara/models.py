@@ -1,5 +1,6 @@
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask.ext.mongoengine import Document
+from flask.ext.mongoengine import Document, ValidationError
+from slugify import slugify
 from __init__ import db, admin
 
 class Organization(Document):
@@ -12,8 +13,12 @@ class Organization(Document):
         return self.name
 
 class Skill(Document):
-    name = db.StringField(max_length=30, required=True)
+    name = db.StringField(max_length=30, required=True, unique=True)
     description = db.StringField(max_length=200, required=True)
+    slug = db.StringField(required=True, max_length=30)
+
+    def clean(self):
+        self.slug = slugify(self.name)
 
     def __repr__(self):
         return self.name
@@ -22,9 +27,13 @@ class Skill(Document):
         return self.name
 
 class User(Document):
-    email = db.StringField(max_length=200, required=True)
-    user_name = db.StringField(max_length=20, required=True)
+    email = db.StringField(max_length=200, required=True, unique=True)
+    user_name = db.StringField(max_length=20, required=True, unique=True)
     password_hash = db.StringField(max_length=67)
+
+    def clean(self):
+        if not self.password_hash:
+            raise ValidationError("You must set the user's password with set_password before saving")
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -36,7 +45,7 @@ class User(Document):
         pass
 
     def __repr__(self):
-        pass
+        return self.user_name
     #    return self.email, self.user_name
 
 

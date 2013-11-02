@@ -11,7 +11,7 @@
             <span class="label-gray">Skills Needed</span>
             <div class="skills">
             {% for skill in org.skills %}
-            <span class="label label-default"><a href="/skills/{{skill.id}}/">{{skill.name}}</a></span></span>
+            <span class="label label-default"><a href="/skills/{{skill.slug}}/">{{skill.name}}</a></span></span>
 
             {% endfor %}
             </div>
