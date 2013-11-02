@@ -36,6 +36,12 @@ class User(Document):
             raise ValidationError("You must set the user's password with set_password before saving")
 
     def set_password(self, password):
+
+        password_len = len(password)
+        
+        if not 8 < password_len < 256:
+            raise ValidationError("Passwords must be greater than 8 chars and less than 256 chars")
+
         self.password_hash = generate_password_hash(password)
 
     def check_password(self, password):
