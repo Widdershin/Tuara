@@ -1,29 +1,30 @@
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask.ext.mongoengine import Document, StringField, ListField, ReferenceField
+from flask.ext.mongoengine import Document
 from __init__ import db, admin
 
 class Organization(Document):
-    name = StringField(required=True)
-    description = StringField(required=True, max_length=400)
-    email = StringField(required=True, max_length=60)
-    skills = ListField(ReferenceField('Skill'))
+    name = db.StringField(required=True, max_length=30)
+    description = db.StringField(required=True, max_length=400)
+    email = db.StringField(required=True, max_length=200)
+    skills = db.ListField(db.ReferenceField('Skill'))
 
     def __str__(self):
         return self.name
 
 class Skill(Document):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(30))
-    description = db.Column(db.String(200), default="")
+    name = db.StringField(max_length=30, required=True)
+    description = db.StringField(max_length=200, required=True)
 
     def __repr__(self):
         return self.name
 
+    def __str__(self):
+        return self.name
+
 class User(Document):
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(200))
-    user_name = db.Column(db.String(20))
-    password_hash = db.Column(db.String(67))
+    email = db.StringField(max_length=200, required=True)
+    user_name = db.StringField(max_length=20, required=True)
+    password_hash = db.StringField(max_length=67)
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -41,6 +42,6 @@ class User(Document):
 
 def register_for_admin(classes):
     for cls in classes:
-        admin.register(cls, session=db.session)
+        admin.register(cls)
 
 register_for_admin([Organization, Skill, User])

@@ -14,12 +14,12 @@ def main():
 
 @app.route('/organizations/')
 def organizations():
-    orgs = models.Organization.query.all()
+    orgs = models.Organization.objects
     return render_template('organizations.html', orgs=orgs)
 
 @app.route('/skills/')
 def skills():
-    skills = models.Skill.query.all()
+    skills = models.Skill.objects
     return render_template('skills.html', skills=skills)
 
 @app.route('/skills/<int:skill_id>/')
