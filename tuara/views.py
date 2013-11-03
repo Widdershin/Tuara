@@ -31,7 +31,8 @@ def skills():
 @app.route('/skills/<skill_slug>/')
 def specific_skill(skill_slug):
     skill = models.Skill.objects.get_or_404(slug=skill_slug)
-    return render_template('specific_skill.html', skill=skill)
+    orgs = models.Organization.objects(skills__in=[skill])
+    return render_template('specific_skill.html', skill=skill, orgs=orgs)
 
 @app.route('/profile/')
 def profile():

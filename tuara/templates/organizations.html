@@ -1,22 +1,7 @@
 {% extends "main.html" %}
+{% from "_utils.html" import render_org %}
 {% block content %}
     {% for org in orgs %}
-    <div class="panel panel-default card">
-
-        <div class="panel-heading"><b>{{org.name}}</b></div>
-        <div class="panel-body">
-            {{org.description}}
-        </div>
-        <div class="panel-footer skills-box">
-            <span class="label-gray">Skills Needed</span>
-            <div class="skills">
-            {% for skill in org.skills %}
-            <span class="label label-default"><a href="/skills/{{skill.slug}}/">{{skill.name}}</a></span></span>
-
-            {% endfor %}
-            </div>
-            <div class="btn-box"><a href="mailto:{{org.email}}"><button type="button" class="btn btn-default card align-right">Contact</button></a></div>
-        </div>
-    </div>
+        {{ render_org(org) }}
     {% endfor %}
 {% endblock %} 

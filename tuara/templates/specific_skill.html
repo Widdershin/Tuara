@@ -1,4 +1,5 @@
 {% extends "main.html" %}
+{% from "_utils.html" import render_org %}
 {% block content %}
 <div class="card">
     <div class="card-contents">
@@ -6,4 +7,8 @@
         <p>{{skill.description}}</p>
     </div>
 </div>
+
+{% for org in orgs %}
+    {{ render_org(org) }}
+{% endfor %}
 {% endblock %}

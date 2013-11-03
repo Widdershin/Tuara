@@ -1,8 +1,9 @@
 {% extends "main.html" %}
 {% block content %}
-    <div class="panel panel-default card">
-        <div class="panel-heading"><b>All Skills</b></div>
-        <div class="panel-body">
+    <div class="card">
+        <div class="card-contents">
+            <span class="label-gray">All Skills</span>
+            </br>
             {% for skill in skills %}
                 <span class="label label-default"><a href="/skills/{{skill.slug}}/">{{skill.name}}</a></span>
             {% endfor %}

@@ -1,0 +1,31 @@
+{% macro render_field(field) %}
+  <dd>{{ field(**kwargs)|safe }}
+  {% if field.errors %}
+    <ul class=errors>
+    {% for error in field.errors %}
+      <li>{{ error }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+  </dd>
+{% endmacro %}
+
+{% macro render_org(org) %}
+  <div class="panel panel-default card">
+
+        <div class="panel-heading"><b>{{org.name}}</b></div>
+        <div class="panel-body">
+            {{org.description}}
+        </div>
+        <div class="panel-footer skills-box">
+            <span class="label-gray">Skills Needed</span>
+            <div class="skills">
+            {% for skill in org.skills %}
+            <span class="label label-default"><a href="/skills/{{skill.slug}}/">{{skill.name}}</a></span></span>
+
+            {% endfor %}
+            </div>
+            <div class="btn-box"><a href="mailto:{{org.email}}"><button type="button" class="btn btn-default card align-right">Contact</button></a></div>
+        </div>
+    </div>
+{% endmacro %}
