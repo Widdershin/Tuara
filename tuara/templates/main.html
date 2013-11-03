@@ -38,7 +38,7 @@
             <li><a href="/register/">Register</a></li>
             <li><a href="/login/">Login</a></li>
             {% else %}
-            <li><a href="/logout/">{{current_user.user_name}}</a></li>
+            <li><a href="/profile/">{{current_user.user_name}}</a></li>
             <li><a href="/logout/">Logout</a></li>
             {% endif %}
           </ul>

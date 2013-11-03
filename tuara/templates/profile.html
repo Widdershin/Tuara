@@ -1,0 +1,16 @@
+{% extends "main.html" %}
+{% block content %}
+<div class="card">
+    <div class="card-contents">
+    <span class="label-gray">Profile</span>
+        <p><b>{{user.user_name}}</b></p>
+        <p>{{user.email}}</p>
+        <br>
+        <p><b>Skills</b></p>
+        {% for skill in user.skills %}
+        <p>{{ skill.name }}</p>
+        {% endfor %}
+
+    </div>
+</div>
+{% endblock %}

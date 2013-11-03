@@ -33,6 +33,11 @@ def specific_skill(skill_slug):
     skill = models.Skill.objects.get_or_404(slug=skill_slug)
     return render_template('specific_skill.html', skill=skill)
 
+@app.route('/profile/')
+def profile():
+    skills = models.Skill.objects
+    return render_template('profile.html', user=current_user, skills=skills)
+
 
 @app.route('/login/')
 def login_page():
@@ -55,7 +60,6 @@ def register():
     form = forms.RegistrationForm()
     
     if form.validate_on_submit():
-        print "Validated form!"
 
         new_user = models.User(user_name=form.username.data, email=form.email.data)
         new_user.set_password(form.password.data)
@@ -63,7 +67,6 @@ def register():
 
         return redirect_func(login_page)
     else:
-        print 'lol no'
         print request.method
 
     return render_template('register.html', form=form)
