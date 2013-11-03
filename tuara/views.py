@@ -82,6 +82,3 @@ def generate_header_links():
 
 
     return dict(header_links=processed_header_links)
-
-if __name__ == '__main__':
-    app.run(debug=True)
