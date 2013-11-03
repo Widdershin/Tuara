@@ -31,7 +31,6 @@ class User(Document, UserMixin):
     email = db.StringField(max_length=200, required=True, unique=True)
     user_name = db.StringField(max_length=20, required=True, unique=True)
     password_hash = db.StringField(max_length=67)
-    logged_in = db.BooleanField(default=False)
 
     def clean(self):
         if not self.password_hash:
@@ -41,8 +40,8 @@ class User(Document, UserMixin):
 
         password_len = len(password)
         
-        if not 8 < password_len < 256:
-            raise ValidationError("Passwords must be greater than 8 chars and less than 256 chars")
+        if not 7 < password_len < 256:
+            raise ValidationError("Passwords must be greater than 7 chars and less than 256 chars")
 
         self.password_hash = generate_password_hash(password)
 

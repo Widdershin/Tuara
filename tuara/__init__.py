@@ -18,4 +18,5 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 
 import models
-import views
+import forms
+from views import *

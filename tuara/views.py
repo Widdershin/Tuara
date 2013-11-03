@@ -1,7 +1,8 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import Flask, render_template, url_for, request, redirect
-from __init__ import app, db, models, login_manager
+from __init__ import app, db, models, login_manager, forms
 from flask.ext.login import login_user, current_user, logout_user, login_required
+from utils import redirect_func
 
 APP_NAME = "Tuara"
 APP_DESCRIPTION = """
@@ -9,28 +10,34 @@ APP_DESCRIPTION = """
  skills with the organizations in their community that their help could most impact.
  """.format(APP_NAME)
 
+
 @app.route('/')
 def main():
     return render_template('main.html')
+
 
 @app.route('/organizations/')
 def organizations():
     orgs = models.Organization.objects
     return render_template('organizations.html', orgs=orgs)
 
+
 @app.route('/skills/')
 def skills():
     skills = models.Skill.objects
     return render_template('skills.html', skills=skills)
+
 
 @app.route('/skills/<skill_slug>/')
 def specific_skill(skill_slug):
     skill = models.Skill.objects.get_or_404(slug=skill_slug)
     return render_template('specific_skill.html', skill=skill)
 
+
 @app.route('/login/')
 def login_page():
     return render_template('login.html')
+
 
 @app.route('/post/login/', methods=['POST'])
 def login():
@@ -42,9 +49,25 @@ def login():
         login_user(user)
     return redirect(url_for(main.__name__))
 
-@app.route('/register/')
+
+@app.route('/register/', methods=('GET', 'POST'))
 def register():
-    return render_template('register.html')
+    form = forms.RegistrationForm()
+    
+    if form.validate_on_submit():
+        print "Validated form!"
+
+        new_user = models.User(user_name=form.username.data, email=form.email.data)
+        new_user.set_password(form.password.data)
+        new_user.save()
+
+        return redirect_func(login_page)
+    else:
+        print 'lol no'
+        print request.method
+
+    return render_template('register.html', form=form)
+
 
 @app.route('/logout/')
 @login_required
@@ -52,9 +75,11 @@ def logout():
     logout_user()
     return redirect(url_for(main.__name__))
 
+
 @login_manager.user_loader
 def load_user(id):
     return models.User.objects.get(id=id)
+
 
 @app.context_processor
 def add_current_user():
@@ -64,9 +89,11 @@ def add_current_user():
         returned_current_user = None
     return {"current_user": returned_current_user}
 
+
 @app.context_processor
 def add_app_details():
     return {"app_name": APP_NAME, "app_description": APP_DESCRIPTION}
+
 
 @app.context_processor
 def generate_header_links():
@@ -79,6 +106,5 @@ def generate_header_links():
         url = url_for(func.__name__)
         active = request.path == url
         processed_header_links.append((label, url, active))
-
 
     return dict(header_links=processed_header_links)
