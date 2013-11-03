@@ -19,7 +19,7 @@
     font-size: 12px;
     margin-left: -0.5em;
     margin-right: 0.5em;
-    top: 1px;
+    margin-top: -1.25em;
     vertical-align: middle;
     display: inline-block;
 }
@@ -80,11 +80,6 @@
 .footer p
 {
     margin: 1em;
-}
-
-.btn
-{
-    margin: 0px; 
 }
 
 .align-right
