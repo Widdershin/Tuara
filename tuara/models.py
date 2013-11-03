@@ -30,6 +30,7 @@ class User(Document):
     email = db.StringField(max_length=200, required=True, unique=True)
     user_name = db.StringField(max_length=20, required=True, unique=True)
     password_hash = db.StringField(max_length=67)
+    logged_in = db.BooleanField(default=False)
 
     def clean(self):
         if not self.password_hash:
@@ -44,11 +45,20 @@ class User(Document):
 
         self.password_hash = generate_password_hash(password)
 
+    def get_id(self):
+        return unicode(self.id) 
+
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
-    def is_authenticated():
-        pass
+    def is_authenticated(self):
+        return True
+
+    def is_active(self):
+        return True
+
+    def is_anonymous(self):
+        return False
 
     def __repr__(self):
         return self.user_name

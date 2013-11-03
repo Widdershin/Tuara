@@ -34,7 +34,11 @@
             {% endfor %}            
           </ul>
           <ul class="nav navbar-nav navbar-right">
+            {% if not current_user %}
             <li><a href="/login/">Login</a></li>
+            {% else %}
+            <li><a href="/logout/">Logged in as {{current_user.user_name}}</a></li>
+            {% endif %}
           </ul>
         </div><!--/.nav-collapse -->
       </div>

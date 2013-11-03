@@ -1,7 +1,7 @@
 from flask import Flask
 from flask.ext.mongoengine import MongoEngine
 from flask.ext.superadmin import Admin, model
-from flask.ext.login import LoginManager, login_user, login_required
+from flask.ext.login import LoginManager
 import sys
 
 app = Flask(__name__)
