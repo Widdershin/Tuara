@@ -31,6 +31,7 @@ class User(Document, UserMixin):
     email = db.StringField(max_length=200, required=True, unique=True)
     user_name = db.StringField(max_length=20, required=True, unique=True)
     password_hash = db.StringField(max_length=67)
+    skills = db.ListField(db.ReferenceField(Skill))
 
     def clean(self):
         if not self.password_hash:
